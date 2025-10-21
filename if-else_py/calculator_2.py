@@ -98,6 +98,7 @@ def main():
                                     case 'd':
                             elif '=' in input_list:
                                 index_start = 0
+                                num = []
                                 for i, c in enumerate(input_list):
                                     if c == "=":
                                         num1 = int(''.join(input_list[index_start:i]))
@@ -106,7 +107,8 @@ def main():
                                     elif c == "+":
                                         num1 = int(''.join(input_list[index_start:i]))
                                     elif c == '-':
-                                        int(num1)
+                                        num.append(int(''.join(input_list[index_start:i])))
+                                                                        
                                     
 
 def check_float_int(string) -> str:
