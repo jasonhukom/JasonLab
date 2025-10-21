@@ -49,7 +49,9 @@ circle_arc_chord_r = lambda r, theta: circle_diameter_r(r) * math.sin(math.radia
 circle_arc_chord_d = lambda d, theta: d * math.sin(math.radians(theta) / 2)
 
 
+
 def main():
+    input_list = []
     while True:
         try:
             opening = int(input("""
@@ -69,48 +71,43 @@ def main():
                     try:
                         user = input()
                         user = check_float_int(user)
+                        for c in user:
+                            if c:
+                                input_list.append(c)
                         if user is str:
                             user = user.lower().strip()
-                            match user:
-                                case 'circle':
-                                    property = input().lower().strip()
-                                    match property:
-                                        case 'help' | '--help':
-                                            print(circleh)
-                                        case 'r':
-                                            input_result()
-                                        case 'd':
-                                                        
+                            if 'circle' == user:
+                                property = input().lower().strip()
+                                match property:
+                                    case 'help' | '--help':
+                                        print(circleh)
+                                    case 'r':
+                                        user_input_as_list = []
+                                        try:
+                                            get_user = input()
+                                            for index, character in enumerate(get_user):
+                                                if character:
+                                                    try:
+                                                        character = float(character)
+                                                    except ValueError:
+                                                        character = character.lower
+                                                    user_input_as_list.append(character)
 
-def input_and_result(
-p1, prompt1, p2, prompt2, p3, prompt3, p4, prompt4, p5, prompt5, p6, prompt6, p7, prompt7, p8, prompt8, p9, prompt9
-):
-    while True:
-        try:
-            x = input('type: ').lower().strip()
-            y = float(input('problem: '))
-        except ValueError:
-            if x == "" or y == "":
-                return
-            else:
-                pass
-        except (EOFError | KeyboardInterrupt | ):
-            return
-        else:
-            match x:
-                case p1 | prompt2:
-                    return
-                case p3 | prompt3:
+                                        except (IndexError, ValueError):
 
-                case p4 | prompt4:
-                case p5 | prompt5:
-                case p6 | prompt6:
-                case p7 | prompt7:
-                case p8 | prompt8:
-                case p9 | prompt9:
-                case _:
-                    pass                   
-
+                                    case 'd':
+                            elif '=' in input_list:
+                                index_start = 0
+                                for i, c in enumerate(input_list):
+                                    if c == "=":
+                                        num1 = int(''.join(input_list[index_start:i]))
+                                        index = i
+                                        num1 = int(num1)
+                                    elif c == "+":
+                                        num1 = int(''.join(input_list[index_start:i]))
+                                    elif c == '-':
+                                        int(num1)
+                                    
 
 def check_float_int(string) -> str:
     """
