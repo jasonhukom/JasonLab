@@ -34,5 +34,5 @@ def email(prompt):
         else:
             return email
 
-
-main()
+if __name__ == "__main__":
+    main()
