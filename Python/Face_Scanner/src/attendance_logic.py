@@ -7,14 +7,12 @@ MIN_INTERVAL_MINUTES = 5
 def process_attendance(user_id):
 	now = datetime.now()
 	today = now.date()
-	time_format_second = "%H:%M:%S"
-	time_format_minute = "%H:%M"
 
 	last = get_last_attendance(user_id, today)
 
 	# Avoid Duplicates
 	if last:
-		last_time = datetime.strptime(last["time"], time_format_second)
+		last_time = datetime.strptime(last["time"], "%H:%M:%S")
 		differences = now - last_time
 		if differences < timedelta(minutes=MIN_INTERVAL_MINUTES):
 			return "BLOCKED", "Too fast"
@@ -30,7 +28,7 @@ def process_attendance(user_id):
 		# first scan today
 		status = "IN"
 
-		start_time = datetime.strptime(SCHOOL_START, time_format_minute).time()
+		start_time = datetime.strptime(SCHOOL_START, "%H:%M").time()
 		if now.time() > start_time:
 			note = "LATE"
 		else:
