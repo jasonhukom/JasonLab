@@ -7,12 +7,12 @@ def get_frame():
 		ret, frame = webcam.read()
 
 		if ret == True:
-			cv.imshow("Face_Scanner", frame)
+			cv.imshow("YO BRO", frame)
 			key = cv.waitKey(1)
 			if key == ord("q"):
 				break
-	cv.release()
-	cv.breakAllWindows()
+	webcam.release()
+	cv.destroyAllWindows()
 
 if __name__ == "__main__":
 	get_frame()
