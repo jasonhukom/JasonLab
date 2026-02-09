@@ -1,0 +1,31 @@
+services:
+  jasonbookstack:
+    image: lscr.io/linuxserver/bookstack:latest
+    container_name: jasonbookstack
+    environment:
+      - PUID=1000 # Use the command "id <your-user>" to find the PUID and PGID
+      - PGID=1000 
+      - TZ=Asia/Jakarta # Your timezone
+      - APP_URL=https://subdomain.domain-name.domain # Your Bookstack URL 
+      - APP_KEY= # Use the command  "docker run -it --rm --entrypoint /bin/bash lscr.io/linuxserver/bookstack:latest appkey" to generate the app key
+      - DB_HOST=mysqldb # Your mysql container name
+      - DB_PORT=3306 # Default port for mysql
+      - DB_USERNAME= # Username for bookstack to access mysql
+      - DB_PASSWORD=jasonhukom2010 # Password for bookstack to access mysql
+      - DB_DATABASE=jasonsql # Your bookstack database name
+      - QUEUE_CONNECTION=database
+      - APP_DEFAULT_DARK_MODE=true
+      - ALLOWED_IFRAME_SOURCES="https://domain-name.domain" # For allowing iframe embedding
+      - ALLOWED_IFRAME_HOSTS="https://domain-name.domain https://subdomain.domain-name.domain"
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+    dns:
+      - # your_ip_address
+      - 192.168.1.1
+    networks:
+      - # your_network_name
+
+networks:
+  your_network_name:
+    external: true

@@ -1,0 +1,17 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    restart: unless-stopped
+    environment:
+      - TUNNEL_TOKEN= # Add your tunnel token here
+    command: tunnel --no-autoupdate run
+    container_name: cloudflared
+    dns:
+      - # Homeserver DNS
+      - 192.168.1.1
+    networks:
+      - your_network_name
+
+networks:
+  your_network_name:
+    external: true
