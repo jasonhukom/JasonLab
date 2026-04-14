@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dx561b7d5b2j"]
+
+[ext_resource type="Texture2D" uid="uid://crpactx0ilety" path="res://assets/Artwork/pixilart-drawing (7).png" id="1_f50pn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f50pn"]
+radius = 6.99927
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f50pn"]
+atlas = ExtResource("1_f50pn")
+region = Rect2(0, 17, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ij6vw"]
+atlas = ExtResource("1_f50pn")
+region = Rect2(17, 17, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghijl"]
+atlas = ExtResource("1_f50pn")
+region = Rect2(34, 17, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44cfe"]
+atlas = ExtResource("1_f50pn")
+region = Rect2(51, 17, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dd465"]
+atlas = ExtResource("1_f50pn")
+region = Rect2(68, 17, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhvu3"]
+atlas = ExtResource("1_f50pn")
+region = Rect2(85, 17, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sjlk"]
+atlas = ExtResource("1_f50pn")
+region = Rect2(102, 17, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qp52p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f50pn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ij6vw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ghijl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44cfe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dd465")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhvu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sjlk")
+}],
+"loop": true,
+"name": &"earthling",
+"speed": 7.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(577, 309)
+scale = Vector2(26.5588, 23.0882)
+shape = SubResource("CircleShape2D_f50pn")
+
+[node name="dead earth" type="AnimatedSprite2D" parent="."]
+position = Vector2(577, 309)
+scale = Vector2(26.5588, 23.0882)
+sprite_frames = SubResource("SpriteFrames_qp52p")
+animation = &"earthling"
+autoplay = "earthling"
+frame_progress = 0.183693

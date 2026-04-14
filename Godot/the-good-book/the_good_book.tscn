@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://42kn056sbyg"]
+
+[ext_resource type="PackedScene" uid="uid://dx561b7d5b2j" path="res://character_body_2d.tscn" id="1_a04r7"]
+[ext_resource type="PackedScene" uid="uid://ctxp6k6rwkjor" path="res://earth.tscn" id="2_3wacr"]
+[ext_resource type="PackedScene" uid="uid://cvt01fqpx2r5l" path="res://text.tscn" id="3_ne70g"]
+
+[node name="The Good Book" type="Node2D"]
+position = Vector2(-429, 164)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_a04r7")]
+visibility_layer = 1023
+position = Vector2(386, -160)
+motion_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1003, 162)
+
+[node name="earth" parent="." instance=ExtResource("2_3wacr")]
+position = Vector2(-656, 20)
+
+[node name="text" parent="." instance=ExtResource("3_ne70g")]
+offset_left = 959.0
+offset_top = -100.0
+offset_right = 1535.0
+offset_bottom = -42.0
+horizontal_alignment = 1
+vertical_alignment = 1

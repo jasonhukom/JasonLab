@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ctg18mqhg1l12"
+path="res://.godot/imported/new world.mp3-8e4c311a476dd5fdd2a9ba666db62134.mp3str"
+
+[deps]
+
+source_file="res://assets/Music and Stuff/new world.mp3"
+dest_files=["res://.godot/imported/new world.mp3-8e4c311a476dd5fdd2a9ba666db62134.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

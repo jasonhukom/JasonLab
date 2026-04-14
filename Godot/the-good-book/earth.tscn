@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://ctxp6k6rwkjor"]
+
+[ext_resource type="Texture2D" uid="uid://crpactx0ilety" path="res://assets/Artwork/pixilart-drawing (7).png" id="1_om26h"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qbwya"]
+atlas = ExtResource("1_om26h")
+region = Rect2(0, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bhor"]
+atlas = ExtResource("1_om26h")
+region = Rect2(17, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5i67w"]
+atlas = ExtResource("1_om26h")
+region = Rect2(34, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trc54"]
+atlas = ExtResource("1_om26h")
+region = Rect2(51, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6k2di"]
+atlas = ExtResource("1_om26h")
+region = Rect2(68, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wpllb"]
+atlas = ExtResource("1_om26h")
+region = Rect2(85, 0, 17, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lyaad"]
+atlas = ExtResource("1_om26h")
+region = Rect2(102, 0, 17, 17)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xlwm0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qbwya")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bhor")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5i67w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trc54")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6k2di")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wpllb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lyaad")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_om26h"]
+radius = 6.53313
+
+[node name="earth" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(553, 203)
+scale = Vector2(30.5588, 28.6765)
+sprite_frames = SubResource("SpriteFrames_xlwm0")
+autoplay = "default"
+frame_progress = 0.497159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(553, 203)
+scale = Vector2(30.5588, 28.6765)
+shape = SubResource("CircleShape2D_om26h")

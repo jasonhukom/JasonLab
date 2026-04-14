@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvt01fqpx2r5l"]
+
+[ext_resource type="FontFile" uid="uid://brg3fdpg46pky" path="res://assets/Pixel Elegant Font/PixelatedEleganceRegular-ovyAA.ttf" id="1_aohfb"]
+
+[node name="text" type="Label"]
+offset_right = 576.0
+offset_bottom = 58.0
+theme_override_fonts/font = ExtResource("1_aohfb")
+theme_override_font_sizes/font_size = 64
+text = "HELLO WORLD!"
+text_direction = 1
