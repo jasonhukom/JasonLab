@@ -5,10 +5,10 @@ public class GanjilGenap {
 	public static void main(String [] args) {
 		Scanner input = new Scanner(System.in);
 		int willRepeat;
+
 		do {
 			int[] bilangan;
-			boolean[] prime_num;
-			int whileLoop;
+			int whileLoop, squaroot;
 			char repeatQ;
 
 			bilangan = new int[2];
@@ -21,28 +21,26 @@ public class GanjilGenap {
 			System.out.println("============================================");
 			System.out.println("");
 
-			prime_num = new boolean[bilangan[1]];
-			for (int k=bilangan[0]; k <= bilangan[1]; k++) {
-				boolean prime;
-				double akar = Math.pow(k, 0.5);
-				System.out.println(akar + "<" + k-1 + "=" 
-				if (akar < k-1) {
-					prime_num[k-(k-1)] = false;
-				} else {
-					prime_num[k-(k-1)] = true;
-				}
-			}
-			System.out.println(Arrays.toString(prime_num));
+			// System.out.println(Arrays.toString(prime_num));
 			for (int j=bilangan[0]; j <= bilangan[1]; j++) {
 				// System.out.println( (int) akar + 1 );
 				// System.out.println(prime_num[j]);
 				// System.out.println(akar + "=" + prime);
-				if (prime_num[j-(j-1)]) {
-					System.out.println(j + "  Bilangan Prima");
-				} else if (j % 2 == 0) {
-					System.out.println(j + "  Bilangan Genap");
+				squaroot = (int) Math.pow(j, 0.5) + 1;
+				System.out.println(j +","+squaroot+"="+(squaroot % j));
+				if (j % 2 == 0) {
+					System.out.print(j + "  Bilangan Genap");
 				} else {
-					System.out.println(j + "  Bilangan Ganjil");
+					System.out.print(j + "  Bilangan Ganjil");
+				}
+				for (int k = 0; k <= squaroot; k++) {
+					if (j % squaroot == k) {
+						System.out.println(" (Prima)");
+						k = squaroot;
+					} else {
+						System.out.println();
+						k = squaroot;
+					}
 				}
 			}
 
