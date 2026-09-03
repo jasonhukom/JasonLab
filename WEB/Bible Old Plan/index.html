@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bible Plan</title>
+    <style>
+        /* CSS Reset and Global Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f8f9fa; display: flex; flex-direction: column; height: 100vh; overflow-x: hidden; }
+
+        /* Header Styles */
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            background-color: #ffffff; padding: 15px 30px; border-bottom: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .logo { font-size: 24px; font-weight: bold; color: #202124; display: flex; align-items: center; gap: 10px; }
+        .quote-container { flex-grow: 1; text-align: center; font-style: italic; color: #5f6368; padding: 0 20px; font-size: 14px; }
+        .time-display { font-size: 14px; font-weight: 500; color: #202124; }
+
+        /* Controls / File Upload */
+        .controls { padding: 15px 30px; background: #fff; border-bottom: 1px solid #e0e0e0; display: flex; gap: 15px; align-items: center; }
+        .controls input[type="file"] { font-size: 14px; }
+
+        /* Calendar Grid Styles */
+        main { flex-grow: 1; padding: 20px; overflow-y: auto; width: 100%; }
+        .calendar-wrapper { max-width: 100%; margin: 0 auto; background: #fff; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        
+        .days-header { display: grid; grid-template-columns: repeat(7, 1fr); background: #f1f3f4; border-bottom: 1px solid #ddd; }
+        .days-header div { padding: 10px; text-align: center; font-weight: 600; color: #3c4043; border-right: 1px solid #ddd; }
+        .days-header div:last-child { border-right: none; }
+
+        .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); background: #ddd; gap: 1px; }
+        
+        /* Exact Square Pixel requirement handled via aspect-ratio */
+        .day-cell { 
+            background: #fff; padding: 10px; display: flex; flex-direction: column; 
+            aspect-ratio: 1 / 1; min-height: 120px; position: relative; transition: background 0.2s;
+        }
+        .day-cell.empty { background: #f8f9fa; }
+        .day-cell.missed { background: #e8eaed; color: #80868b; }
+        .day-cell.read { background: #e6f4ea; }
+        
+        .date-number { font-size: 12px; font-weight: 600; color: #70757a; margin-bottom: 8px; }
+        
+        /* Draggable Passage */
+        .passage { 
+            background: #4285f4; color: white; padding: 6px 8px; border-radius: 4px; font-size: 12px; 
+            cursor: grab; margin-bottom: auto; word-wrap: break-word; text-align: center; font-weight: 500;
+        }
+        .passage:active { cursor: grabbing; }
+
+        /* Action Buttons */
+        .actions { display: flex; justify-content: flex-end; gap: 5px; margin-top: 8px; }
+        .btn { 
+            border: none; border-radius: 4px; padding: 4px 8px; cursor: pointer; font-size: 12px; display: flex; align-items: center; justify-content: center;
+        }
+        .btn-check { background-color: #34a853; color: white; }
+        .btn-x { background-color: #ea4335; color: white; }
+        .btn:hover { opacity: 0.8; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><span>✝</span> Bible Plan</div>
+        <div class="quote-container" id="quoteText">Loading inspiration...</div>
+        <div class="time-display" id="currentTime"></div>
+    </header>
+
+    <div class="controls">
+        <label for="csvUpload"><strong>Upload your bibleplan.csv:</strong></label>
+        <input type="file" id="csvUpload" accept=".csv">
+        <button onclick="clearData()" style="padding: 5px 10px; cursor: pointer;">Reset Saved Progress</button>
+    </div>
+
+    <main>
+        <div class="calendar-wrapper">
+            <div class="days-header">
+                <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+            </div>
+            <div class="calendar-grid" id="calendarGrid">
+                </div>
+        </div>
+    </main>
+
+    <script>
+        // 1. Motivational Quotes
+        const quotes = [
+            '"Your word is a lamp for my feet, a light on my path." - Psalm 119:105',
+            '"I have hidden your word in my heart that I might not sin against you." - Psalm 119:11',
+            '"The grass withers and the flowers fall, but the word of our God endures forever." - Isaiah 40:8',
+            '"All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness." - 2 Timothy 3:16',
+            '"For the word of God is alive and active." - Hebrews 4:12',
+            '"Do not merely listen to the word, and so deceive yourselves. Do what it says." - James 1:22',
+            '"Man shall not live on bread alone, but on every word that comes from the mouth of God." - Matthew 4:4',
+            '"The unfolding of your words gives light; it gives understanding to the simple." - Psalm 119:130',
+            '"Let the message of Christ dwell among you richly..." - Colossians 3:16',
+            '"Every word of God is flawless; he is a shield to those who take refuge in him." - Proverbs 30:5'
+        ];
+
+        // 2. Book Name Mapping (Short to Long)
+        const bookNames = {
+            "Gen": "Genesis", "Ex": "Exodus", "Lev": "Leviticus", "Num": "Numbers", "Deut": "Deuteronomy",
+            "Jos": "Joshua", "Judg": "Judges", "Ruth": "Ruth", "1 Sa": "1 Samuel", "2 Sa": "2 Samuel",
+            "1 Ki": "1 Kings", "2 Ki": "2 Kings", "1 Ch": "1 Chronicles", "2 Ch": "2 Chronicles",
+            "Ezr": "Ezra", "Neh": "Nehemiah", "Est": "Esther", "Job": "Job", "Ps": "Psalms", "Pro": "Proverbs",
+            "Ecc": "Ecclesiastes", "Song": "Song of Solomon", "Isa": "Isaiah", "Jer": "Jeremiah", "Lam": "Lamentations",
+            "Eze": "Ezekiel", "Dan": "Daniel", "Hos": "Hosea", "Joel": "Joel", "Am": "Amos", "Ob": "Obadiah",
+            "Jon": "Jonah", "Mic": "Micah", "Nah": "Nahum", "Hab": "Habakkuk", "Zep": "Zephaniah",
+            "Hag": "Haggai", "Zec": "Zechariah", "Mal": "Malachi", "Mat": "Matthew", "Mk": "Mark",
+            "Lk": "Luke", "Jn": "John", "Act": "Acts", "Rom": "Romans", "1 Co": "1 Corinthians",
+            "2 Co": "2 Corinthians", "Gal": "Galatians", "Eph": "Ephesians", "Php": "Philippians",
+            "Col": "Colossians", "1 Th": "1 Thessalonians", "2 Th": "2 Thessalonians", "1 Ti": "1 Timothy",
+            "2 Ti": "2 Timothy", "Tit": "Titus", "Phm": "Philemon", "Heb": "Hebrews", "Jam": "James",
+            "1 Pe": "1 Peter", "2 Pe": "2 Peter", "1 Jn": "1 John", "2 Jn": "2 John", "3 Jn": "3 John",
+            "Jude": "Jude", "Rev": "Revelation"
+        };
+
+        // State Variables
+        let planData = JSON.parse(localStorage.getItem('biblePlanState')) || [];
+        let draggedPassageIndex = null;
+
+        // Initialize Page
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set Quote
+            document.getElementById('quoteText').innerText = quotes[Math.floor(Math.random() * quotes.length)];
+            
+            // Set Time Timer
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('currentTime').innerText = now.toLocaleString();
+            }, 1000);
+
+            // Render existing data if any
+            if (planData.length > 0) renderCalendar();
+        });
+
+        // Expand passage abbreviations
+        function expandPassage(passageStr) {
+            let expanded = passageStr;
+            for (const [short, long] of Object.entries(bookNames)) {
+                const regex = new RegExp(`\\b${short}\\b`, 'g');
+                expanded = expanded.replace(regex, long);
+            }
+            return expanded;
+        }
+
+        // CSV Upload Handler
+        document.getElementById('csvUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const text = e.target.result;
+                processCSV(text);
+            };
+            reader.readAsText(file);
+        });
+
+        // Process CSV Text
+        function processCSV(csvText) {
+            const lines = csvText.split('\n').filter(line => line.trim() !== '');
+            planData = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                // Regex to handle CSV parsing with quotes
+                const matches = lines[i].match(/(?:"([^"]*)")|([^,]+)/g);
+                if (matches && matches.length >= 2) {
+                    const date = matches[0].replace(/"/g, '');
+                    const passageRaw = matches[1].replace(/"/g, '');
+                    
+                    if (date && passageRaw) {
+                        planData.push({
+                            id: 'reading-' + i,
+                            date: date,
+                            passage: expandPassage(passageRaw),
+                            status: 'pending' // 'pending', 'read', 'missed'
+                        });
+                    }
+                }
+            }
+            saveState();
+            renderCalendar();
+        }
+
+        // Save to LocalStorage
+        function saveState() {
+            localStorage.setItem('biblePlanState', JSON.stringify(planData));
+        }
+
+        // Clear LocalStorage
+        function clearData() {
+            if(confirm("Are you sure you want to reset all your progress?")) {
+                localStorage.removeItem('biblePlanState');
+                planData = [];
+                renderCalendar();
+            }
+        }
+
+        // Action Handlers
+        function markRead(index) {
+            planData[index].status = 'read';
+            saveState();
+            renderCalendar();
+        }
+
+        function markMissedAndShift(index) {
+            // Mark current as missed
+            planData[index].status = 'missed';
+            
+            // Extract the unread passages from this point onward
+            let unreadPassages = [];
+            for (let i = index; i < planData.length; i++) {
+                if (planData[i].status !== 'missed' && planData[i].status !== 'read') {
+                    unreadPassages.push(planData[i].passage);
+                }
+            }
+            
+            // Re-assign shifted passages to the next available days
+            let passageIdx = 0;
+            // The missed day keeps its visual buttons but the assigned reading moves forward.
+            // We shift passages starting from the day AFTER the missed day.
+            for (let i = index + 1; i < planData.length; i++) {
+                if (planData[i].status !== 'read' && passageIdx < unreadPassages.length) {
+                    planData[i].passage = unreadPassages[passageIdx];
+                    planData[i].status = 'pending';
+                    passageIdx++;
+                }
+            }
+            
+            saveState();
+            renderCalendar();
+        }
+
+        // Drag and Drop Handlers
+        function dragStart(e, index) {
+            draggedPassageIndex = index;
+            e.dataTransfer.effectAllowed = 'move';
+        }
+
+        function dragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+        }
+
+        function drop(e, targetIndex) {
+            e.preventDefault();
+            if (draggedPassageIndex !== null && draggedPassageIndex !== targetIndex) {
+                // Swap the passages
+                const tempPassage = planData[draggedPassageIndex].passage;
+                const tempStatus = planData[draggedPassageIndex].status;
+                
+                planData[draggedPassageIndex].passage = planData[targetIndex].passage;
+                planData[draggedPassageIndex].status = planData[targetIndex].status;
+                
+                planData[targetIndex].passage = tempPassage;
+                planData[targetIndex].status = tempStatus;
+                
+                saveState();
+                renderCalendar();
+            }
+            draggedPassageIndex = null;
+        }
+
+        // Render Calendar Grid
+        function renderCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            if (planData.length === 0) return;
+
+            // Find first date to determine padding days
+            const firstDateStr = planData[0].date;
+            const firstDateObj = new Date(firstDateStr);
+            const startDayOfWeek = firstDateObj.getUTCDay(); // 0 = Sunday
+
+            // Fill empty cells before the first date
+            for (let i = 0; i < startDayOfWeek; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'day-cell empty';
+                grid.appendChild(emptyCell);
+            }
+
+            // Create cells for data
+            planData.forEach((day, index) => {
+                const cell = document.createElement('div');
+                cell.className = `day-cell ${day.status}`;
+                
+                // Drop zone events
+                cell.ondragover = dragOver;
+                cell.ondrop = (e) => drop(e, index);
+
+                // Date Number
+                const dateNum = document.createElement('div');
+                dateNum.className = 'date-number';
+                dateNum.innerText = day.date; // E.g., "2026-09-01"
+                cell.appendChild(dateNum);
+
+                // Draggable Passage Block
+                const passageBlock = document.createElement('div');
+                passageBlock.className = 'passage';
+                passageBlock.draggable = true;
+                passageBlock.innerText = day.passage;
+                passageBlock.ondragstart = (e) => dragStart(e, index);
+                cell.appendChild(passageBlock);
+
+                // Action Buttons
+                const actions = document.createElement('div');
+                actions.className = 'actions';
+                
+                const btnCheck = document.createElement('button');
+                btnCheck.className = 'btn btn-check';
+                btnCheck.innerHTML = '✔';
+                btnCheck.title = "Mark Read";
+                btnCheck.onclick = () => markRead(index);
+
+                const btnX = document.createElement('button');
+                btnX.className = 'btn btn-x';
+                btnX.innerHTML = '✖';
+                btnX.title = "Missed (Shift Forward)";
+                btnX.onclick = () => markMissedAndShift(index);
+
+                actions.appendChild(btnCheck);
+                actions.appendChild(btnX);
+                cell.appendChild(actions);
+
+                grid.appendChild(cell);
+            });
+        }
+    </script>
+</body>
+</html>
