@@ -1,0 +1,29 @@
+services:
+  mysqldb:
+    image: mariadb:10.6
+    container_name: mysqldb
+    restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - mysqldb:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - MYSQL_ROOT_PASSWORD= # your_root_password 
+    networks:
+      - your_network_name
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    environment:
+      - PMA_ARBITRARY=1
+    networks:
+      - your_network_name
+
+networks:
+  your_network_name:
+    external: true
+
+volumes:
+  mysqldb:
