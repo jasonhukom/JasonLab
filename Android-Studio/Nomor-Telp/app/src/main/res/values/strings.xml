@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">jasonproject2</string>
+    <string name="inputStr">Silahkan masukan nomor Anda</string>
+    <string name="TelpRumah">Telp Rumah</string>
+    <string name="Mobile">Mobile</string>
+    <string name="TelpKantor">Telp Kantor</string>
+    <string name="Button">Button</string>
+</resources>
