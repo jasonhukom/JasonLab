@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌹 Rose Blooming from Code</title>
+    <meta name="description" content="A single div transforms into a beautiful blooming 3D rose.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@500;700&family=Fira+Code:wght@500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="vignette"></div>
+
+
+    <div class="spotlight"></div>
+    <div class="ambient-light" id="ambientLight"></div>
+
+    <div class="trigger-overlay" id="triggerOverlay">
+        <div class="glass-card">
+            <div class="card-glow"></div>
+            <div class="rose-icon">🌹</div>
+            <h2 class="title">Love.css</h2>
+            <div class="loading-bar-container">
+                <div class="loading-bar" id="loadingBar"></div>
+            </div>
+            <p class="status-text" id="statusText">Ready to compile...</p>
+            <button class="start-button" id="startButton" disabled>
+                <span class="btn-text">Tap to Bloom</span>
+                <span class="btn-shine"></span>
+            </button>
+        </div>
+    </div>
+
+    <div class="scene">
+        <div class="rose-wrapper" id="roseWrapper">
+            <div class="stem-group">
+                <div class="stem" id="stem">
+                    <div class="stem-highlight"></div>
+                </div>
+                <div class="thorn thorn-1" id="thorn1"></div>
+                <div class="thorn thorn-2" id="thorn2"></div>
+                <div class="leaf leaf-left" id="leafLeft">
+                    <div class="leaf-vein"></div>
+                </div>
+                <div class="leaf leaf-right" id="leafRight">
+                    <div class="leaf-vein"></div>
+                </div>
+            </div>
+
+            <div class="calyx" id="calyx"></div>
+
+            <div class="rose-head" id="roseHead">
+                <div class="rose-glow"></div>
+                <div class="rose-glow-inner"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="end-text" id="endText">
+        <p class="tagline" id="tagline">i coded this for you</p>
+        <span class="rose-emoji">🌹</span>
+    </div>
+
+    <div id="fallingPetals"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
