@@ -1,37 +1,57 @@
 # Ask Paragraf, change what to what
 
 def main():
-	word = ""
+    paragraph = input("Enter your paragraph:\n")
 
-	try:
-		n_word_2_chge = int(input("How many word do you want to change (n):\n"))
-	except TypeError:
-		print("You type wrong, changing your word to 1")
-		n_word_2_chge = 1
-	for word in range(n_word_2_chge):
-		wordchge = []
-		word = input(f"({word + 1}) word you want to change: ")
-		wordchge.append(word)
-	for wordch in range(n_word_2_chge):
-		word2chge = []
-		word = input(f"({word+1}) word to change: ")
-		word2chge.append(word)
+    words_to_change = []
+    replacement_words = []
 
-	lowcaps = input("Would you want to remove capitalization? (Y/n) ")
-	lowcaps = lowcaps.upper()
-	if lowcaps == "Y":
-		for w in wordchge:
-			wordcghe[w].lower() 
-	elif lowcaps == "N":
-		for w in word2chge:
-			word2chge[w].lower()
+    try:
+        number_of_words = int(
+            input("How many words do you want to change (n):\n")
+        )
+    except ValueError:
+        print("You typed wrong, changing the number of words to 1")
+        number_of_words = 1
 
-def changer(p, w, w2c):
-	#paragraf, word, word 2 change
-	for word in p:
-		for w_chge in w:
-			if word == w_chge:
-				p[word] == w2c[w_chge]
+    # Ask which words to change
+    for i in range(number_of_words):
+        word = input(f"({i + 1}) Word you want to change: ")
+        words_to_change.append(word)
+
+    # Ask what they should become
+    for i in range(number_of_words):
+        word = input(f"({i + 1}) Word to change it to: ")
+        replacement_words.append(word)
+
+    remove_caps = input(
+        "Would you want to remove capitalization? (Y/n): "
+    ).upper()
+
+    if remove_caps == "Y":
+        paragraph = paragraph.lower()
+        words_to_change = [word.lower() for word in words_to_change]
+        replacement_words = [word.lower() for word in replacement_words]
+
+    paragraph = changer(
+        paragraph,
+        words_to_change,
+        replacement_words
+    )
+
+    print("\nResult:")
+    print(paragraph)
+
+
+def changer(paragraph, words, replacements):
+    for i in range(len(words)):
+        paragraph = paragraph.replace(
+            words[i],
+            replacements[i]
+        )
+
+    return paragraph
+
 
 if __name__ == "__main__":
-	main()
+    main()
