@@ -1,0 +1,24 @@
+services:
+  9router:
+    image: decolua/9router:latest
+    ports:
+      - "20128:20128"
+    volumes:
+      - "$HOME/.9router:/app/data"
+    environment:
+      DATA_DIR: /app/data
+      HEADROOM_URL: http://headroom:8787
+      INITIAL_PASSWORD: "123456"
+    depends_on:
+      - headroom
+    networks:
+      - jasonhukom
+
+  headroom:
+    image: ghcr.io/chopratejas/headroom:latest
+    ports:
+      - "8787:8787"
+
+networks:
+  jasonhukom:
+    external: true
