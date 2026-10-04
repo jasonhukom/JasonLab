@@ -1,6 +1,12 @@
+[← Back to PHP](../README.md)
+
 # Praktikum Pemrograman Web PHP
 
+> 🇬🇧 **In short:** a school repository with the results of the *Web Programming (PHP)* practicums: seven lab sessions that go from `echo` and variables to forms and a MySQL database with simple CRUD. Each session has a `latihan.php` (guided exercise) and a `tugas.php` (assignment).
+
 Repository ini berisi hasil praktikum **Pemrograman Web (PHP)** tahun ajaran **2026/2027** di **SMK Negeri 2 Surakarta**.
+
+---
 
 ## 📁 Struktur Repository
 
@@ -46,50 +52,47 @@ Repository ini berisi hasil praktikum **Pemrograman Web (PHP)** tahun ajaran **2
     └── tugas/
         └── tampil.php
 ```
-🎯 Tujuan Pembelajaran
+
+---
+
+## 🎯 Tujuan Pembelajaran
 
 Praktikum ini bertujuan untuk:
 
-Memahami dasar-dasar pemrograman PHP.
+- Memahami dasar-dasar pemrograman PHP.
+- Memahami penggunaan variabel, operator, percabangan, dan perulangan dalam PHP.
+- Membuat dan memproses form menggunakan PHP.
+- Membuat sistem CRUD sederhana.
+- Menghubungkan PHP dengan database MySQL.
 
-Memahami penggunaan variabel, operator, percabangan, dan perulangan dalam PHP.
+---
 
-Membuat dan memproses form menggunakan PHP.
+## 🧪 Daftar Praktikum
 
-Membuat sistem CRUD sederhana.
+| Praktikum | Materi |
+| --- | --- |
+| Praktikum 1 | Dasar PHP dan output |
+| Praktikum 2 | Variabel, operator, dan percabangan |
+| Praktikum 3 | Percabangan dan perulangan |
+| Praktikum 4 | Function dan pengolahan data |
+| Praktikum 5 | Array dan foreach |
+| Praktikum 6 | Form HTML, POST, dan PHP |
+| Praktikum 7 | Database MySQL dan CRUD |
 
-Menghubungkan PHP dengan database MySQL.
+---
 
+## 🛠️ Tools yang Digunakan
 
-🧪 Daftar Praktikum
+- PHP
+- MySQL
+- XAMPP
+- Terminal
+- Web Browser seperti Chrome, Firefox, atau Brave
+- IDE seperti Visual Studio Code, Notepad++, atau AntiGravity IDE
 
-Praktikum	Materi
+---
 
-Praktikum 1	Dasar PHP dan output
-Praktikum 2	Variabel, operator, dan percabangan
-Praktikum 3	Percabangan dan perulangan
-Praktikum 4	Function dan pengolahan data
-Praktikum 5	Array dan foreach
-Praktikum 6	Form HTML, POST, dan PHP
-Praktikum 7	Database MySQL dan CRUD
-
-
-🛠️ Tools yang Digunakan
-
-PHP
-
-MySQL
-
-XAMPP
-
-Terminal
-
-Web Browser seperti Chrome, Firefox, atau Brave
-
-IDE seperti Visual Studio Code, Notepad++, atau AntiGravity IDE
-
-
-🚀 Menjalankan Project
+## 🚀 Menjalankan Project
 
 Pastikan PHP sudah terpasang dan XAMPP tersedia.
 
@@ -97,77 +100,83 @@ Project dapat dijalankan menggunakan PHP Development Server.
 
 Contoh:
 
+```bash
 cd /xampp
 php -S localhost:8000
+```
 
 Kemudian buka folder praktikum yang ingin dijalankan melalui browser.
 
 Contoh:
 
+```text
 http://localhost:8000/praktikum-php/praktikum1/latihan.php
+```
 
 > Sesuaikan URL dengan lokasi folder project di komputer.
 
+---
 
-
-🗄️ Praktikum 7
+## 🗄️ Praktikum 7
 
 Praktikum 7 menggunakan database db_sekolah dan berisi beberapa file untuk koneksi, penambahan, serta penampilan data.
 
-Database
+### Database
 
-praktikum7/latihan/db_sekolah.sql
+- `praktikum7/latihan/db_sekolah.sql`
 
-File PHP
+### File PHP
 
-praktikum7/latihan/koneksi.php
-praktikum7/latihan/tambah.php
-praktikum7/latihan/tampil.php
+- `praktikum7/latihan/koneksi.php`
+- `praktikum7/latihan/tambah.php`
+- `praktikum7/latihan/tampil.php`
 
 Import file db_sekolah.sql ke MySQL melalui phpMyAdmin sebelum menjalankan bagian database.
 
-📚 Materi Praktikum
+---
 
-Praktikum 1
+## 📚 Materi Praktikum
 
- - Mempelajari dasar-dasar PHP dan penggunaan echo untuk menampilkan output.
+### Praktikum 1
 
-Praktikum 2
+- Mempelajari dasar-dasar PHP dan penggunaan echo untuk menampilkan output.
 
- - Mempelajari variabel, operasi matematika, perhitungan nilai, dan percabangan menggunakan if dan elseif.
+### Praktikum 2
 
-Praktikum 3
+- Mempelajari variabel, operasi matematika, perhitungan nilai, dan percabangan menggunakan if dan elseif.
 
- - Mempelajari struktur kontrol, perulangan for, operator modulus, serta penggunaan continue.
+### Praktikum 3
 
-Praktikum 4
+- Mempelajari struktur kontrol, perulangan for, operator modulus, serta penggunaan continue.
 
- - Mempelajari pembuatan dan penggunaan function serta pengolahan data siswa.
+### Praktikum 4
 
-Praktikum 5
+- Mempelajari pembuatan dan penggunaan function serta pengolahan data siswa.
 
- - Mempelajari array, array asosiatif, dan perulangan foreach.
+### Praktikum 5
 
-Praktikum 6
+- Mempelajari array, array asosiatif, dan perulangan foreach.
 
- - Mempelajari HTML Form, metode POST, pengambilan data menggunakan $_POST, serta pembuatan kalkulator sederhana menggunakan function.
+### Praktikum 6
 
-Praktikum 7
+- Mempelajari HTML Form, metode POST, pengambilan data menggunakan $_POST, serta pembuatan kalkulator sederhana menggunakan function.
 
- - Mempelajari koneksi PHP dengan database MySQL dan konsep CRUD sederhana.
+### Praktikum 7
 
+- Mempelajari koneksi PHP dengan database MySQL dan konsep CRUD sederhana.
 
 ---
 
-👨‍💻 Informasi
+## 👨‍💻 Informasi
 
-Nama: Jason Christopher Hukom
-Kelas: XI PPLG-B
-No: 18
-Sekolah: SMK Negeri 2 Surakarta
-Mata Pelajaran: Pemrograman Web (PW)
-Tahun Ajaran: 2026/2027
-
+| | |
+| --- | --- |
+| **Nama** | Jason Christopher Hukom |
+| **Kelas** | XI PPLG-B |
+| **No** | 18 |
+| **Sekolah** | SMK Negeri 2 Surakarta |
+| **Mata Pelajaran** | Pemrograman Web (PW) |
+| **Tahun Ajaran** | 2026/2027 |
 
 ---
 
