@@ -1,8 +1,6 @@
 <h1 align='center'>JasonLab</h1>
 <p align='center'>My Personal Lab</p>
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M8R22ADGYR)
-
 > This is Jason's personal lab, MY PERSONAL LAB. I made this on 9 October 2025, enjoy making and uploading repository here. I hope myself in the future will enjoy this codespace.
 >
 > I made this repository for storing projects, but I will still make other repository for specific project. This is just the lab where I test stuff, all in the same repository, you can see all of my commits here.
@@ -89,3 +87,5 @@ JasonLab/
 - ❌ **Doesn't run yet** – has a known error that needs fixing first (the README says what)
 
 ## My Personal Lab<br>
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M8R22ADGYR)
