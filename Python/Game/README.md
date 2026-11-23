@@ -20,8 +20,10 @@
 ## ▶️ Run it
 
 ```bash
+python3 -m .venv venv
+.\venv\Scripts\activate
 pip install pygame
-python main.py
+python3 main.py
 ```
 
 Run it from this folder: the background picture `bg.jpeg` is loaded relative to the current directory.
