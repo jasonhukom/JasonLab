@@ -1,0 +1,24 @@
+services:
+  adguardhome:
+    image: adguard/adguardhome:latest
+    container_name: adguardhome
+
+    ports:
+      #--- Listining Ports ---
+      - "53:53/tcp"       # DNS
+      - "53:53/udp"       # DNS
+      # - "3000:3000/tcp"   # Initial Setup Wizzard
+      # - "8080:80/tcp"   # Admin UI HTTP
+
+    volumes:
+    - ./workdir:/opt/adguardhome/work
+    - ./confdir:/opt/adguardhome/conf
+
+    restart: unless-stopped
+
+    networks:
+    - your_network_name
+
+networks:
+  your_network_name:
+    external: true

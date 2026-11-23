@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Noto Sans Display", sans-serif;
+    font-optical-sizing: auto;
+    background-color:ivory;
+    color:rosybrown;
+    margin: 0;
+}
+
+header {
+    background-color: rgb(153, 117, 117);
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding:2px;
+    color:white;
+    display:flex;
+    align-items: justify;
+}
+
+h1 {
+    color:orange;
+    text-align:center;
+    margin-top: 30px;
+}
+
+h2 {
+    margin-left:20px;
+}
+h3 {
+    color:rgb(153, 117, 117);
+    text-align: center;
+}
+
+ul {
+    text-align: center;
+}
+
+li {
+    text-align: left;
+}
+
+.navbar {
+    display:justify;
+    align-items:left;
+}
+
+.grid-pengenalan {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Membagi jadi 2 kolom sama besar (1 fraction) */
+    gap: 30px; /* Jarak antar kolom */
+    align-items: center; /* Teks di tengah secara vertikal */
+    max-width: 900px;
+    margin: 0 auto; /* Supaya area ini berada di tengah layar */
+    padding: 20px;
+}
+
+.kolom-foto img {
+    border-radius: 12px; /* Membuat sudut gambar membulat */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Memberi efek bayangan */
+}
+
+.poin-penting {
+    margin: 0 500px;
+}
+
+.copyright {
+    text-align:center;
+    color:white;
+    box-shadow: black;
+}
+
+a {
+    color:bisque;
+}
+
+table {
+    width: 900px;
+    margin: 20px auto; /* Ketengah */
+    border-collapse: collapse; /* Menyatukan garis ganda */
+    background-color:white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgb(153, 117, 117);
+    border: 3px solid rgb(153, 117, 117);
+}
+
+th {
+    background-color:rgb(153, 117, 117);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: whitesmoke;
+}
+
+form {
+    max-width: 500px;
+    margin: 0 auto 50px auto; /* Ketengah */
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input[type="text"], input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box; /* Agar kotak tidak melewati batas saat diberi padding */
+}
+
+button {
+    width: auto;
+    text-align: right;
+    background-color:#38BDF8;
+    padding: 5px;
+    border: none;
+    border-radius: 100px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+input[type="submit"] {
+    width: 100%;
+    background-color: #e67e22;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer; /* Mengubah kursor jadi tangan saat ditunjuk */
+}
+
+input[type="submit"]:hover {
+    background-color: #d35400; /* Warna menggelap saat disorot mouse */
+}
+
+footer {
+    background-color: rgb(153, 117, 117);
+    color:white;
+    margin: 0;
+    padding: 5px;
+}
+
+/* DARK MODE */ 
+
+.dark-mode {
+    background-color: #878d96;
+    color:#FFFFFF;
+}
+
+.dark-mode header,.dark-mode footer {
+    background-color:#121212;
+}
+.dark-mode h1,.dark-mode h3 {
+    color:#38BDF8;
+}
+
+.dark-mode table {
+    width: 900px;
+    margin: 20px auto; /* Ketengah */
+    border-collapse: collapse; /* Menyatukan garis ganda */
+    background-color:rgb(0, 0, 0.2);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.dark-mode td,.dark-mode th {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    border: 3px solid rgba(0,0,0,0.2);
+    background-color: #1E2229;
+    color: #FFFFFF;
+}
+
+.dark-mode th {
+    background-color:rgba(0,0,0,0.1);
+}
+
+.dark-mode tr:nth-child(even) {
+    background-color: #1E2229;
+}
+
+.dark-mode form {
+    color:black;
+    
+}
+
+.dark-mode button {
+    background-color:#e67e22;
+}

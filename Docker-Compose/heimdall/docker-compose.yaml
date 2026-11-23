@@ -1,0 +1,30 @@
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jakarta
+      - ALLOW_INTERNAL_REQUESTS=true #optional
+
+    volumes:
+      - /path/to/heimdall/config:/config
+
+    ports:
+      - "8080:80/tcp"
+      - "4443:443/tcp"
+
+    restart: unless-stopped
+
+    dns:
+      - 192.168.1.150
+      - 192.168.1.1
+
+    networks:
+      - jasonhukom
+
+networks:
+  jasonhukom:
+    external: true

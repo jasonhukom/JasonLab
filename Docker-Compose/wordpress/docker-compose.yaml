@@ -1,0 +1,24 @@
+services:
+  wordpress:
+    image: wordpress
+    container_name: wordpress
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: # mysql container name
+      WORDPRESS_DB_USER: # Username mysql for wordpress to access
+      WORDPRESS_DB_PASSWORD: # Password mysql for wordpress to access
+      WORDPRESS_DB_NAME: # Your database name
+    volumes:
+      - wordpress:/var/www/html
+    dns:
+      - # your_ip_address
+      - 192.168.1.1
+    networks:
+      - your_network_name
+
+networks:
+  your_network_name:
+    external: true
+
+volumes:
+  wordpress:

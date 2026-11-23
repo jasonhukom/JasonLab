@@ -1,0 +1,26 @@
+services:
+  netbird-client:
+    image: netbirdio/netbird:latest
+    container_name: netbird-client
+    hostname: your_hostname
+    restart: unless-stopped
+
+    cap_add:
+      - NET_ADMIN
+      - SYS_MODULE
+      - SYS_ADMIN
+      - SYS_RESOURCE
+
+    volumes:
+      - ./config:/etc/netbird
+      - ./netbird-data:/var/lib/netbird
+    
+    environment:
+      - NB_SETUP_KEY= # Your setup key
+      
+    networks:
+      - your_network_name
+
+networks:
+  your_network_name:
+    external: true
